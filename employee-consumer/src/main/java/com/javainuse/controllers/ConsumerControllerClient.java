@@ -32,14 +32,14 @@ public class ConsumerControllerClient {
 	@GetMapping
 	public List<com.javainuse.dto.Employee> getAll(){
 		
-		ServiceInstance serviceInstance=loadBalancer.choose("BANKING");
+		ServiceInstance serviceInstance=loadBalancer.choose("employee-producer");
 				
 		String uri=serviceInstance.getUri().toString();
 		
 		System.out.println(uri+"  is working");
 	
 		RestTemplate rest=new RestTemplate();
-		List<com.javainuse.dto.Employee> ll1= rest.getForObject(uri+"/api/v1/employees", List.class);
+		List<com.javainuse.dto.Employee> ll1= rest.getForObject(uri+"/employee", List.class);
 		
 		return ll1;
 	}
